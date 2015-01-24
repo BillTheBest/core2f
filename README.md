@@ -4,7 +4,7 @@ Docker containers and relevant automation tools that minimize friction when depl
 Overview
 --------
 
-Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.
+Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` come from.
 
 In the infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditching the legacy baggage that have held common Linux distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers that are currently managed by Docker.  This includes a continuos deployment flow where updates to Stable, Beta, and Alpha channels are hapenning on an ongoing basis.  The Containers themselves are what minimize friction, but getting them deployed in all the necessary places with the latest version may be challening at times.
 
