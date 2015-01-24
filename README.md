@@ -4,7 +4,7 @@ Docker containers and relevant automation tools that minimize friction when depl
 Overview
 --------
 
-Ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.
+Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.
 
 In the infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditchin the legacy baggage that have held common distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers and currently Docker.
 
