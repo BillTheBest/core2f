@@ -15,8 +15,9 @@ This project contains relevant steps, automation tools instructions, and eventua
  - [Deploy VApp](#deploy_vapp) (Optional)
  - [SSH to CoreOS](#ssh) (Optional)
 - [Automation](#Automation)
- -[end-to-end](#End-to-End Deploys)
- -[further_customization](#Further Customization)
+ -[End-to-End Deploys](#end-to-end)
+ -[Further Customization](#further_customization)
+
 #<a id="overview">Overview</a>
 
 Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` comes from.
@@ -222,7 +223,7 @@ To be continued.. Expect Vagrant box examples once the vCloud Air and Director p
 ## <a id="further_customization">Further customization</a>
 It is a good idea to minimize the configuration data in your ```user_data``` file that gets added to the ```Cloud Drive ISO```.  This will make your template more useable.
 
-Once a deploy occurs, and the CoreOS instance has networking access and is accessible via SSH, further customization can take place via SSH.  A good suggestion is to continue to leverage the ```cloud-config``` method.  In this case you can run ```/usr/bin/coreos-cloudinit --from-file /usr/share/oem/cloud-config.yml``` or the same from a URL to further customize the guest after deployment. 
+Once a deploy occurs, and the CoreOS instance has networking access and is accessible via SSH, further customization can take place via SSH.  A good suggestion is to continue to leverage the ```cloud-config``` method.  In this case you can run ```/usr/bin/coreos-cloudinit --from-file /usr/share/oem/cloud-config.yml``` or the same from a URL to further customize the guest after deployment.
 
 
 Licensing
