@@ -127,7 +127,8 @@ vCloud Director generally makes use of "Guest Customization" that allows you to 
 #cloud-config
 hostname: hostname
 ssh_authorized_keys:
-    - ssh-rsa contents_of_your_public_key_file```
+    - ssh-rsa contents_of_your_public_key_file
+```
 
 
 5. (optional) If you want to set the password instead you can run ```openssl password -1``` and enter a password.  The output can be added at the bottom of the ```user_data``` file.
