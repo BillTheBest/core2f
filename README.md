@@ -15,8 +15,8 @@ This project contains relevant steps, automation tools instructions, and eventua
  - [Deploy VApp](#deploy_vapp) (Optional)
  - [SSH to CoreOS](#ssh) (Optional)
 - [Automation](#Automation)
- -[End-to-End Deploys](#end-to-end)
- -[Further Customization](#further_customization)
+ - [End-to-End Deploys](#end-to-end)
+ - [Further Customization](#further_customization)
 
 #<a id="overview">Overview</a>
 
