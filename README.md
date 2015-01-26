@@ -134,8 +134,9 @@ ssh_authorized_keys:
 ```
 users:
    – name: core
-     passwd: key_from_openssl_command```
-     
+     passwd: key_from_openssl_command
+```
+
 
 6. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
 7. Run ```mkisofs -R -V config-2 -o configdrive.iso new-drive/``` to create the ```configdrive.iso``` or respective name that you will later upload to vCloud Director.
