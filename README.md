@@ -32,7 +32,7 @@ This section describes the manual method that you can use to establish CoreOS im
 
 The desire for these steps is not only to deploy CoreOS with a custom certificate, but also configure network services in vCloud Air that will expose the VMs similar to other Public Clouds.  For this we will include a Organizational Network/Edge Gateway configuration example from vCloud Air.
 
-## 1. <a id="networking">(Optional) Networking</a>
+## <a id="networking">1. (Optional) Networking</a>
 The steps listed here are meant to mimic CoreOS deployments in common Public Clouds.  This means the ```Config Drive``` based customization, DHCP/manually configured IPs, and also availability from a publicly accessible IP.  Under the covers, there is a good amount of automation to achieve this.
 
 For the networking example, I am using the new vCloud Air On-Demand service.  The default behavior of the service establishes an Edge Gateway (firewall from the internet to your VDC) and an Organizational Network (connection to your edge and default L2 network).
@@ -170,7 +170,7 @@ From the GUI you would either upload the ISO as a VApp or a VApp Template into a
 ## <a id="deploy_template">4. (Optional) Deploy Template</a>
 If you uploaded as a VApp previously then you can skip this step.  From the vCloud Air or vCloud Director GUI's create a VApp from the template that you uploaded.  Attach the template to the ```default-routed-network```.
 
-## 5. <a id="attach_media">Attach Media</a>
+## <a id="attach_media">5. Attach Media</a>
 In order to customize the CoreOS image with appropriate login information or other details you must attach the ISO that was uploaded.  This ISO can be reused across many CoreOS images, a minimal ISO is desired.  From the vCloud Director GUI, navigate to the VApp.  Right click it, and press ```Open```.  This should reveal the ```Virtual Machine```.  Right click VM and press ```Insert CD/DVD from Catalog...```.  Choose the appropriate media.
 
 ## <a id="boot_vapp">6. Boot VApp</a>
