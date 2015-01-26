@@ -122,7 +122,7 @@ vCloud Director generally makes use of "Guest Customization" that allows you to 
 1. From OS X - Install CDR tools package which includes ```ovftool```.  If you have ```brew``` installed, then leverage the following command ```brew install cdrtools```.  There are plenty of other methods to get the ovftool binary installed in most Linux OSs.
 2. Create a directory structure to be encapsulated in an ISO with ```mkdir -p new-drive/openstack/latest```
 3. Obtain an existing pre-shared key, possibly ```cat ~/.ssh/id_rsa.pub```.
-4. Edit user_data file ```vi new-drive/openstack/latest/user_data```.  Change the ```hostname``` and modify the ```ssh_authorized_keys```.
+4. Edit user_data file ```vi new-drive/openstack/latest/user_data```.  Change the ```hostname``` or remove the hostname line (if making a template) and modify the ```ssh_authorized_keys```.
 ```
 #cloud-config
 hostname: hostname
