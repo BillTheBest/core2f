@@ -129,12 +129,14 @@ hostname: hostname
 ssh_authorized_keys:
     - ssh-rsa contents_of_your_public_key_file```
 
+
 5. (optional) If you want to set the password instead you can run ```openssl password -1``` and enter a password.  The output can be added at the bottom of the ```user_data``` file.
 ```
 users:
    – name: core
-     passwd: key_from_openssl_command
-```
+     passwd: key_from_openssl_command```
+     
+
 6. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
 7. Run ```mkisofs -R -V config-2 -o configdrive.iso new-drive/``` to create the ```configdrive.iso``` or respective name that you will later upload to vCloud Director.
 
