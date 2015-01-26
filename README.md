@@ -145,8 +145,21 @@ users:
      passwd: key_from_openssl_command
 ```
 
+6. (optional) If you want to set a static IP address you can do that here.  The output can be added at the bottom of the ```user_data``` file.  Replace the ```192.168.1.x``` subnet information with your own.
+```
+write_files:
+   – path: /etc/systemd/network/static.network
+     permissions: 0644
+     content: |
+      [Match]
+      Name=en*
+      [Network]
+      Address=192.168.1.214/24
+      Gateway=192.168.1.250
+      DNS=192.168.1.11
+```
 
-6. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
+7. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
 7. Run ```mkisofs -R -V config-2 -o configdrive.iso new-drive/``` to create the ```configdrive.iso``` or respective name that you will later upload to vCloud Director.
 
 ## <a id="upload_isos">3. Upload ISOs to vCloud Director</a>
