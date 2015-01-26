@@ -154,9 +154,9 @@ write_files:
       [Match]
       Name=en*
       [Network]
-      Address=192.168.1.214/24
-      Gateway=192.168.1.250
-      DNS=192.168.1.11
+      Address=192.168.109.214/24
+      Gateway=192.168.109.1
+      DNS=192.168.109.1
 ```
 
 7. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
