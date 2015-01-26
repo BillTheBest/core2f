@@ -1,5 +1,5 @@
 # CORE2F
-This project contains Docker containers and relevant steps and automation tools that minimize friction when deploying CoreOS to vSphere/vCloud Air/vCloud Director.  
+This project contains relevant steps, automation tools instructions, and eventually Docker containers to help minimize friction when deploying CoreOS to vSphere/vCloud Air/vCloud Director.  
 
 
 - [Overview](#overview)
@@ -18,9 +18,9 @@ This project contains Docker containers and relevant steps and automation tools 
 
 Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` comes from.
 
-In the infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditching the legacy baggage that have held common Linux distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers that are currently managed by Docker.  This includes a continuos deployment flow where updates to Stable, Beta, and Alpha channels are hapenning on an ongoing basis.  The Containers themselves are what minimize friction, but getting them deployed in all the necessary places with the latest version may be challening at times.
+In quickly changing infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditching the legacy baggage that have held common Linux distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers that are currently managed by Docker.  This includes a continuos deployment flow where updates to Stable, Beta, and Alpha channels are hapenning on an ongoing basis.  The Containers themselves are what minimize friction, but getting them deployed in all the necessary places with the latest version may be challening at times.
 
-The most popular Enterpirse based Hypervisor is VMware's vSphere.  This hypervisor also serves at the heart of VMware's Public Cloud and On-Demand service as well as vCloud Director for Private Clouds.  Since the Private and vCloud Director sides are mostly considered self-managed clouds it is important to keep up to date CoreOS images available in the catalog.
+The most popular Enterprise based Hypervisor is VMware's vSphere.  This hypervisor also serves at the heart of VMware's Public Cloud and On-Demand service as well as vCloud Director for Private Clouds.  Since the Private and vCloud Director sides are mostly considered self-managed clouds it is important to keep up to date CoreOS images available in the catalog.
 
 The project is meant to allow continuous deployment of CoreOS templates or images to VMware infrastructure.  
 
