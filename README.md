@@ -14,7 +14,7 @@ This project contains Docker containers and relevant steps and automation tools 
  - [Check-In VApp to Catalog](#checkin_vapp)
 - [Automation](#Automation)
 
-#Overview <a id="overview"></a>
+#<a id="overview">Overview</a>
 
 Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` comes from.
 
@@ -26,13 +26,13 @@ The project is meant to allow continuous deployment of CoreOS templates or image
 
 
 
-# Manual Method - vCloud Air/vCloud Director <a id="manual_method"></a>
+# <a id="manual_method">Manual Method - vCloud Air/vCloud Director</a>
 This section describes the manual method that you can use to establish CoreOS images in your vCloud Air or vCloud Director catalog.  There are plenty of methods out there, but so far they have likely leveraged insecure methods with default certificates to bring CoreOS images up.  This may be fine in some case, but probably isn't a good idea for production desires.  VMware is in tech-preview with CoreOS as a secure version as an OVA which includes the open source vmtools version.
 > Warning: the details here may be overkill for your use case since CoreOS can be very easy to get up and running in many cases, ie. boot_kernel coreos.autologin to skip authentication from the console, or from the insecure image with a pre-created public key.  The following process is intended to model a end-to-end automated process that delivers updated CoreOS images and customized cloud-config files through vCloud Director.
 
 The desire for these steps is not only to deploy CoreOS with a custom certificate, but also configure network services in vCloud Air that will expose the VMs similar to other Public Clouds.  For this we will include a Organizational Network/Edge Gateway configuration example from vCloud Air.
 
-## 1. (Optional) Networking
+## 1. <a id="networking">(Optional) Networking</a>
 The steps listed here are meant to mimic CoreOS deployments in common Public Clouds.  This means the ```Config Drive``` based customization, DHCP/manually configured IPs, and also availability from a publicly accessible IP.  Under the covers, there is a good amount of automation to achieve this.
 
 For the networking example, I am using the new vCloud Air On-Demand service.  The default behavior of the service establishes an Edge Gateway (firewall from the internet to your VDC) and an Organizational Network (connection to your edge and default L2 network).
@@ -115,7 +115,7 @@ DHCP is needed unless you specify a static IP in your ```Cloud Drive```.  vCloud
 
 
 
-## 2. Create cloud-config File and Config Drive ISO
+## <a id="create_cc_cd">Create cloud-config File and Config Drive ISO</a>
 vCloud Director generally makes use of "Guest Customization" that allows you to modify specific parameters in VMs and run custom scripts.  This process is heavily based on vm tools, and isn't very flexibly.  The generally accepted public cloud method is to use cloud-config files that contain YAML definitions of parameters, units, and other details for the guest.  The cloud-config file is traditionally applied via a URL or ISO.  Since currently, the guest customization is ignored for the open source VM tools, this example leverages an ISO that gets mounted to the VM, and when the VM boots it applies the customization which should include the updated certificate and/or ```core``` password.
 
 ### Create configdrive.iso
@@ -138,7 +138,7 @@ users:
 6. (optional) Add anything you would like to the ```cloud-config``` file, see the CoreOS page https://coreos.com/docs/cluster-management/setup/cloudinit-config-drive/.
 7. Run ```mkisofs -R -V config-2 -o configdrive.iso new-drive/``` to create the ```configdrive.iso``` or respective name that you will later upload to vCloud Director.
 
-## 3. Upload ISOs to vCloud Director
+## <a id="upload_isos">3. Upload ISOs to vCloud Director</a>
 You may only need to do this once if you keep your ```user_data``` file with minimal information.  Once your CoreOS image is online and reachable via SSH, you may at any time re-run ```sudo coreos-cloudinit -from-file user_data``` to add additional details.
 
 ### From the GUI - Config Drive
@@ -167,28 +167,28 @@ From the GUI you would either upload the ISO as a VApp or a VApp Template into a
 2. (Optional) The following command will import the OVF as a VApp.
 > "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --acceptAllEulas http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ova "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&vapp=coreos_vapp_name"
 
-## 4. (Optional) Deploy Template
+## <a id="deploy_template">4. (Optional) Deploy Template</a>
 If you uploaded as a VApp previously then you can skip this step.  From the vCloud Air or vCloud Director GUI's create a VApp from the template that you uploaded.  Attach the template to the ```default-routed-network```.
 
-## 5. Attach Media
+## 5. <a id="attach_media">Attach Media</a>
 In order to customize the CoreOS image with appropriate login information or other details you must attach the ISO that was uploaded.  This ISO can be reused across many CoreOS images, a minimal ISO is desired.  From the vCloud Director GUI, navigate to the VApp.  Right click it, and press ```Open```.  This should reveal the ```Virtual Machine```.  Right click VM and press ```Insert CD/DVD from Catalog...```.  Choose the appropriate media.
 
-## 6. Boot VApp
+## <a id="boot_vapp">6. Boot VApp</a>
 Power on the VApp, ensure the VM inside of the VApp is attached to the ```default-routed-network```.  You should see the VM customized with the appropriate hostname if you open the console.  
 
 If the desire is to simply create a good template then you can skip to the ```Add to Template``` section since once the CoreOS VM has booted it will have modified the SSH key.  
 ### 6. (Optional) Is DHCP configured already?
 You can posssibly take it from here.  DHCP is the default behavior for CoreOS unless modified from the ```Cloud Drive``` file to be static.  You can see the IP from vCloud Director listed at the VM, or from the console of the VM at the user prompt.  If it is not there, then you probably need to check out the networking section further since the VM was likely unable to get a DHCP address.
 
-## 7. (Optional) Stop VApp
+## <a id="stop_vapp">7. (Optional) Stop VApp</a>
 Go to the VApps and right click the running VApp and press ```Stop VApp```.  This will initiate a guest shutdown.
 
-## 8. (Optional) Check In VApp to Catalog
+## <a id="checkin_vapp">8. (Optional) Check In VApp to Catalog</a>
 Right click the VApp and press ```Add to Catalog```.  Fill in desired options, and ensure ```Customize VM Settings``` is selected.  This will make sure that hardware is customized for the VM.
 
 
 
-Automation
+<a id="automation">Automation</a>
 ----------
 To be continued.. Expect Vagrant box examples once the vCloud Air and Director plugins are updated..
 
