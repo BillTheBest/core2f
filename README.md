@@ -4,16 +4,19 @@ This project contains relevant steps, automation tools instructions, and eventua
 
 - [Overview](#overview)
 - [Manual Method - vCloud Air/vCloud Director](#manual_method)
- - [Networking](#networking)
+ - [Networking](#networking) (Optional)
  - [Create cloud-config File and Config Drive ISO](#create_cc_cd)
  - [Upload ISOs to vCloud Director](#upload_isos)
- - [Deploy Template](#deploy_template)
+ - [Deploy Template or VApp](#deploy_template)
  - [Attach Media](#attach_media)
  - [Boot VApp](#boot_vapp)
- - [Stop VApp](#stop_vapp)
- - [Check-In VApp to Catalog](#checkin_vapp)
+ - [Stop VApp](#stop_vapp) (Optional)
+ - [Check-In VApp to Catalog](#checkin_vapp) (Optional)
+ - [Deploy VApp](#deploy_vapp) (Optional)
+ - [SSH to CoreOS](#ssh) (Optional)
 - [Automation](#Automation)
-
+ -[end-to-end](#End-to-End Deploys)
+ -[further_customization](#Further Customization)
 #<a id="overview">Overview</a>
 
 Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` comes from.
@@ -32,6 +35,8 @@ This section describes the manual method that you can use to establish CoreOS im
 
 The desire for these steps is not only to deploy CoreOS with a custom certificate, but also configure network services in vCloud Air that will expose the VMs similar to other Public Clouds.  For this we will include a Organizational Network/Edge Gateway configuration example from vCloud Air.
 
+One more note.  Certain portions of the steps may be useful on a recurring basis once you have things to a certain point.  For example, once you have created an ISO with your specific public key, you can check that image into the catalog and do deploys from that template without the need to reference this information again.
+
 ## <a id="networking">1. (Optional) Networking</a>
 The steps listed here are meant to mimic CoreOS deployments in common Public Clouds.  This means the ```Config Drive``` based customization, DHCP/manually configured IPs, and also availability from a publicly accessible IP.  Under the covers, there is a good amount of automation to achieve this.
 
@@ -46,8 +51,8 @@ In order to expose the CoreOS image that you deployed to the internet for usage,
 For this walk through, I am going to create a VDC from scratch.
 
 1. Login and open a chosen vCloud Air VPC
-2. (Optional) Press the ```+``` button next to ```Virtual Data Centers```.
-3. (Optional) Enter any name and continue.  On the left side you should see the new VDC, wait until it is complete (a few minutes).  You might need to refresh your screen.
+2. Press the ```+``` button next to ```Virtual Data Centers```.
+3. Enter any name and continue.  On the left side you should see the new VDC, wait until it is complete (a few minutes).  You might need to refresh your screen.
 
 ## Configure Gateway and Network
 Once the VDC is created, you must configure the ```Gateway```/```Edge Gateway``` and the ```Network```/```Organizational Network```.
@@ -74,7 +79,7 @@ First we will create a ```Public IP``` and inbound/outbound NAT rules.  This ens
 9.  For ```Translated (External) Source
 10. Press ```Next``` followed by ```Finish```.
 
-You have created a dynamic NAT rule that ensures all newly initiated outbound traffic leaves via a specific pulic IP. You have also established that the IP will forward all new traffic to this public IP inbound to ```192.168.109.1```.  The next step is the firewall rules.
+You have created a dynamic NAT rule that ensures all newly initiated outbound traffic leaves via a specific pulic IP. You have also established that the IP will forward all new traffic to this public IP inbound to ```192.168.109.2```.  The next step is the firewall rules.
 
 ### Add Firewall Rules
 1. Select the ```Firewall Rules``` tab.  
@@ -104,6 +109,7 @@ The NAT section can be modified if you wish to use a single IP and forward ports
 
 ### Enable DHCP
 DHCP is needed unless you specify a static IP in your ```Cloud Drive```.  vCloud Director cannot customize the IP for you currently.
+
 1. Select the ```Edge Gateways tab```.
 2. Right click ```gateway``` and select ```Edge Gateway Services...```.
 3. On the ```DHCP``` tab, press the ```Enable DHCP``` checkbox.
@@ -171,7 +177,7 @@ From the GUI you would either upload the ISO as a VApp or a VApp Template into a
 2. (Optional) The following command will import the OVF as a VApp.
 > "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --acceptAllEulas http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ova "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&vapp=coreos_vapp_name"
 
-## <a id="deploy_template">4. (Optional) Deploy Template</a>
+## <a id="deploy_template">4. (Optional) Deploy VApp Template or VApp</a>
 If you uploaded as a VApp previously then you can skip this step.  From the vCloud Air or vCloud Director GUI's create a VApp from the template that you uploaded.  Attach the template to the ```default-routed-network```.
 
 ## <a id="attach_media">5. Attach Media</a>
@@ -185,16 +191,38 @@ If the desire is to simply create a good template then you can skip to the ```Ad
 You can posssibly take it from here.  DHCP is the default behavior for CoreOS unless modified from the ```Cloud Drive``` file to be static.  You can see the IP from vCloud Director listed at the VM, or from the console of the VM at the user prompt.  If it is not there, then you probably need to check out the networking section further since the VM was likely unable to get a DHCP address.
 
 ## <a id="stop_vapp">7. (Optional) Stop VApp</a>
-Go to the VApps and right click the running VApp and press ```Stop VApp```.  This will initiate a guest shutdown.
+Go to the VApps and right click the running VApp and press ```Stop VApp```.  This will initiate a guest shutdown.  Next ejecti the media by opening the VApp and right clicking the VM and selectin ```Eject media```.
 
 ## <a id="checkin_vapp">8. (Optional) Check In VApp to Catalog</a>
 Right click the VApp and press ```Add to Catalog```.  Fill in desired options, and ensure ```Customize VM Settings``` is selected.  This will make sure that hardware is customized for the VM.
 
+## <a id="deploy">9. (Optional) Deploy VApp</a>
+At this point you can deploy your VApp from the template.
 
 
-<a id="automation">Automation</a>
-----------
+## <a id="ssh">10. (Optional) SSH to the VM</a>
+In order to access the VM you can now SSH to it.  You had the option of exposing the VM publicly through that NAT and firewall process listed above, or to leave it interal to your vCD networking.  You also had the option to leverage DHCP or static IP addressing.  In addition you could have also specified a password for the ```core``` user or decided to leverage the ```public/private key pair``` method to access the VM without a username.  One last option was to leverage NAT to forward specific ports in bound or expose a single public IP to a  single CoreOS instance.
+
+### SSH with username and specified password
+```ssh core@ip```
+
+### SSH with public/private key pair
+Depending on your keypair, the file will vary here.  But based on our example, the following would be valid.
+```ssh core@external_ip -i ~/.ssh/id_rsa```
+
+### SSH with custom port forward
+The ```22222``` port would be changeable of course to whichever port you decided to forward in.
+```ssh core@external_ip -i ~/.ssh/id_rsa -p 22222```.
+
+# <a id="automation">Automation</a>
+
+## <a id="end-to-end">End-to-end deploys</a>
 To be continued.. Expect Vagrant box examples once the vCloud Air and Director plugins are updated..
+
+## <a id="further_customization">Further customization</a>
+It is a good idea to minimize the configuration data in your ```user_data``` file that gets added to the ```Cloud Drive ISO```.  This will make your template more useable.
+
+Once a deploy occurs, and the CoreOS instance has networking access and is accessible via SSH, further customization can take place via SSH.  A good suggestion is to continue to leverage the ```cloud-config``` method.  In this case you can run ```/usr/bin/coreos-cloudinit --from-file /usr/share/oem/cloud-config.yml``` or the same from a URL to further customize the guest after deployment. 
 
 
 Licensing
