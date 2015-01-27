@@ -72,11 +72,11 @@ First we will create a ```Public IP``` and inbound/outbound NAT rules.  This ens
 1. Press ```Add NAT Rule```.
 2. Select ```DNAT``` to create the internal to external rule.  This could be created only once for the VDC since all outbound traffic could be sharing a single IP.
 3. Select the dropdown for ```Original (External) IP``` and select the new public IP.
-4. Leave the reset default and enter ```192.168.109.0/24``` in the ```Translated (Internal) IP/Range dialog```.
+4. Leave the reset default and enter ```192.168.109.2``` in the ```Translated (Internal) IP/Range dialog```.
 5. Press ```Next```.
 6. Press ```Add``` to add an additional rule.
 7. Select ```SNAT```.
-8. Enter ```192.168.109.2``` as the IP.  This can be anything, but we will use the ```192.168.109.2-250``` range later for DHCP.
+8. Enter ```192.168.109.0/24``` as the subnet.  This can be anything, but we will use the ```192.168.109.2-250``` range later for DHCP.
 9.  For ```Translated (External) Source
 10. Press ```Next``` followed by ```Finish```.
 
