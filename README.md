@@ -22,7 +22,7 @@ This project contains relevant steps, automation tools instructions, and eventua
 
 Have you ever competed for the quickest time to solve a rubix cube?  ```cube2f``` is a special cube that has rounded edges and core lubrication.  The special cube minimizes friction to help a player get an edge.  The combination of this strategy for minimizing friciton for deploying CoreOS and the special rubix cube are where the project name, ```core2f``` comes from.
 
-In quickly changing infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditching the legacy baggage that have held common Linux distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers that are currently managed by Docker.  This includes a continuos deployment flow where updates to Stable, Beta, and Alpha channels are hapenning on an ongoing basis.  The Containers themselves are what minimize friction, but getting them deployed in all the necessary places with the latest version may be challening at times.
+In a quickly changing infrastructure world, ```CoreOS``` is one of the first Linux distributions focused on ditching the legacy baggage that have held common Linux distros back.  The new OS is called a ```Container OS```, where it is hyper-focused on core ingredients to running containers that are currently managed by Docker.  This includes a continuos deployment flow where updates to Stable, Beta, and Alpha channels are hapenning on an ongoing basis.  The Containers themselves are what minimize friction, but getting them deployed in all the necessary places with the latest version may be challening at times.
 
 The most popular Enterprise based Hypervisor is VMware's vSphere.  This hypervisor also serves at the heart of VMware's Public Cloud and On-Demand service as well as vCloud Director for Private Clouds.  Since the Private and vCloud Director sides are mostly considered self-managed clouds it is important to keep up to date CoreOS images available in the catalog.
 
@@ -44,6 +44,7 @@ The steps listed here are meant to mimic CoreOS deployments in common Public Clo
 For the networking example, I am using the new vCloud Air On-Demand service.  The default behavior of the service establishes an Edge Gateway (firewall from the internet to your VDC) and an Organizational Network (connection to your edge and default L2 network).
 
 In order to expose the CoreOS image that you deployed to the internet for usage, or further customization you likely must establish three things:
+
 1. DHCP for the Organizational Network.
 2. NAT translation inbound and outbound from the edge.
 3. Firewall rules that allow specific or all traffic from the edge.
@@ -186,10 +187,12 @@ You may only need to do this once if you keep your ```user_data``` file with min
 From the GUI you would either upload the ISO as a VApp or a VApp Template into a catalog.  From the CLI you have both options as well.
 
 ### From CLI - CoreOS ISO
-1. (Optional) Use the following command to import the OVF as a VApp Template.  Notice the ```alpha``` lists the Alpha channel, which could be Beta, or Stable once they have the same OVA.  The ```current``` references the most recent in that channel, but could be any version with the OVA.
-> "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --acceptAllEulas http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ova "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&catalog=default-catalog&vappTemplate=coreos_template_name"
-2. (Optional) The following command will import the OVF as a VApp.
+In order to attach the ```config-drive``` ISO, you must have a VApp available.  The VAppTemplate does not allow customization unless it is first deployed to a VApp.  We list both methods below, but the preferred option would be to deploy straight to a VApp.
+1. (Optional) The following command will import the OVF as a VApp.
 > "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --acceptAllEulas http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ova "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&vapp=coreos_vapp_name"
+2. (Optional) Use the following command to import the OVF as a VApp Template.  Notice the ```alpha``` lists the Alpha channel, which could be Beta, or Stable once they have the same OVA.  The ```current``` references the most recent in that channel, but could be any version with the OVA.
+> "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --acceptAllEulas http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ova "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&catalog=default-catalog&vappTemplate=coreos_template_name"
+
 
 ## <a id="deploy_template">4. (Optional) Deploy VApp Template or VApp</a>
 If you uploaded as a VApp previously then you can skip this step.  From the vCloud Air or vCloud Director GUI's create a VApp from the template that you uploaded.  Attach the template to the ```default-routed-network```.
