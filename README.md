@@ -166,6 +166,16 @@ write_files:
 ## <a id="upload_isos">3. Upload ISOs to vCloud Director</a>
 You may only need to do this once if you keep your ```user_data``` file with minimal information.  Once your CoreOS image is online and reachable via SSH, you may at any time re-run ```sudo coreos-cloudinit -from-file user_data``` to add additional details.
 
+### (Optional) Create Catalog
+When uploading the media, the catalog determines what VDC the media uploaded to.  If you have one VDC, then you can use the ```default-catalog``` with your only VDC.  If you want to target an environment with multiple VDCs then you will need to add another catalog.
+
+1. (Optional) Login to vCloud Air.
+2. Open vCloud Director whether from a ```Virutal Private Cloud``` (Networks -> Manage in vCloud Director) in vCloud Air, or directly from an ```Organization``` in vCloud Director.
+3. Press the ```Catalogs``` tab.
+4. Press the ```+``` button for a new catalog.
+5. Enter a name and press ```Next```.
+6. Select ```Pre-provision on specific storage policy```.  From the drop-down select ```Standard``` or appropriate policy and VDC.
+
 ### From the GUI - Config Drive
 1. (Optional) Login to vCloud Air.
 2. Open vCloud Director whether from a ```Virutal Private Cloud``` (Networks -> Manage in vCloud Director) in vCloud Air, or directly from an ```Organization``` in vCloud Director.
@@ -181,7 +191,7 @@ You may only need to do this once if you keep your ```user_data``` file with min
  1. (Optional) Download and Install ```ovftool``` from VMware.  A simple google search should yield a proper version.  Right now ```4.0``` is current.
  2. (Optional) Leverage the Docker container process from https://github.com/emccode/docker-ovftool.  This may be handy if you build the Docker container and reuse specific versions or reuse the containers from Public Cloud VMs to get better throughput.
 2. Upload the ```Config Drive``` ISO as media to the vCloud Director catalog.
-> "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --sourceType="ISO" --vCloudTemplate="false" configdrive.iso  "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&vdc=your_vdc_name&media=cyour_iso_name&catalog=default-catalog".
+> "/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool"  --sourceType="ISO" --vCloudTemplate="false" configdrive.iso  "vcloud://youraccount@yourdomain@fqdn_region_vca:443?org=your_org_id&media=cyour_iso_name&catalog=default-catalog".
 
 ### Repeat the desired process for CoreOS ISO
 From the GUI you would either upload the ISO as a VApp or a VApp Template into a catalog.  From the CLI you have both options as well.
