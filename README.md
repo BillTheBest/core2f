@@ -1,6 +1,7 @@
 # CORE2F
 This project contains relevant steps, automation tools instructions, and eventually Docker containers to help minimize friction when deploying CoreOS to vSphere/vCloud Air/vCloud Director.  
 
+In its end state, it should enable frictionless usage of CoreOS on VMware platforms as a fully automated service that continually grabs CoreOS ISOs, creates Cloud Drive ISOs, and updates the respective VMware catalogs.  
 
 - [Overview](#overview)
 - [Manual Method - vCloud Air/vCloud Director](#manual_method)
