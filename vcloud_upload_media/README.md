@@ -1,5 +1,5 @@
 # vcloud_upload_media
-This portion of *Core2F* represents functionality that allows you to upload ISO media files to a specific catalog and VDC.
+This portion of *Core2F* represents functionality that allows you to upload ISO media files to a specific catalog and VDC.  Currently ```ovftool``` does not allow this capability unless you create catalogs manually that align to storage policies which from specific VDCs.
 
 There is currently a Ruby script that can act in a standalone manner along with a Docker container that works without dependencies.
 
