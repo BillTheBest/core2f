@@ -8,7 +8,7 @@ The ```vcloud_upload_media.rb``` script is based on VMware's vCloud Air ```ruby_
 ## Build Docker Container
 1. Clone the repo with ```git clone https://github.com/emccode/core2f```.
 2. Enter the repo and script directory with ```cd core2f/vcloud_upload_media/```.
-3. ```docker build -t emccode/vcloud_upload_media```.
+3. ```docker build -t emccode/vcloud_upload_media .```.
 
 ## Run Docker Container
 The following command should be self explanatory for the environemnt variables that must be specified.  Ensure that you are specifying a correct path with the ```-v $(pwd):/host``` parameter where ```$(pwd)``` represents the directory the media to be uploaded exists.
