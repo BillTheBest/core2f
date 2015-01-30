@@ -3,6 +3,8 @@ This portion of *Core2F* represents functionality that allows you to upload ISO 
 
 There is currently a Ruby script that can act in a standalone manner along with a Docker container that works without dependencies.
 
+The ```vcloud_upload_media.rb``` script is based on VMware's vCloud Air ```ruby_vcloud_sdk``` project.
+
 ## Build Docker Container
 1. Clone the repo with ```git clone https://github.com/emccode/core2f```.
 2. Enter the repo and script directory with ```cd core2f/vcloud_upload_media/```.
