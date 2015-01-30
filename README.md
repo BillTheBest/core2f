@@ -17,6 +17,7 @@ In its end state, it should enable frictionless usage of CoreOS on VMware platfo
  - [SSH to CoreOS](#ssh) (Optional)
 - [Automation](#Automation)
  - [End-to-End Deploys](#end-to-end)
+ - [Upload Media](#upload_media)
  - [Further Customization](#further_customization)
 
 #<a id="overview">Overview</a>
@@ -246,6 +247,36 @@ The ```22222``` port would be changeable of course to whichever port you decided
 
 ## <a id="end-to-end">End-to-end deploys</a>
 To be continued.. Expect Vagrant box examples once the vCloud Air and Director plugins are updated..
+
+## <a id="coreos_to_vapp">Upload CoreOS Images to VApp</a>
+
+## <a id="create_cloud_drive_iso">Create Cloud Drive ISO</a>
+
+## <a id="upload_media">Upload Media</a>
+
+### Ruby Script
+In order to upload media, you can use the following parameters along with the ```vcloud_upload_media``` Ruby script.  You must install the ```ruby_vcloud_sdk``` gem first.
+
+    vcloud_url='https://us-virginia-1-4.vchs.vmware.com:443'
+    vcloud_username='user@domain@org_name' \
+    vcloud_password='password' \
+    vcloud_catalog_name='catalog_name' \
+    vcloud_vdc_name='vdc_name' \
+    vcloud_dest_iso_name='dest_media_name' \
+    vcloud_file='source_file_path' \
+    ruby vcloud_upload_media.rb
+
+### Docker Container
+See the ```vcloud_upload_media``` directory.
+
+## <a id="attach_media">Attach Media</a>
+
+## <a id="boot_coreos_vapp">Boot CoreOS VApp</a>
+
+## <a id="shutdown_coreos_vapp">Shutdown CoreOS VApp</a>
+
+## <a id="create_vapptemplate">Create VApp Template</a>
+
 
 ## <a id="further_customization">Further customization</a>
 It is a good idea to minimize the configuration data in your ```user_data``` file that gets added to the ```Cloud Drive ISO```.  This will make your template more useable.
