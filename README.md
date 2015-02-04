@@ -265,7 +265,7 @@ In order to upload media, you can use the following parameters along with the ``
 
 
 ### Docker Container
-See the ```vcloud_upload_media``` directory.
+See the ```vcloud_upload_vapp``` directory.
 
 ## <a id="create_cloud_drive_iso">Create Cloud Drive ISO</a>
 ### Go App
