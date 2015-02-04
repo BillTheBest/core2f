@@ -17,6 +17,7 @@ In its end state, it should enable frictionless usage of CoreOS on VMware platfo
  - [SSH to CoreOS](#ssh) (Optional)
 - [Automation](#Automation)
  - [End-to-End Deploys](#end-to-end)
+ - [Upload VApp](#upload_vapp)
  - [Upload Media](#upload_media)
  - [Further Customization](#further_customization)
 
@@ -249,6 +250,22 @@ The ```22222``` port would be changeable of course to whichever port you decided
 To be continued.. Expect Vagrant box examples once the vCloud Air and Director plugins are updated..
 
 ## <a id="coreos_to_vapp">Upload CoreOS Images to VApp</a>
+The script only works with OVF and associated VMDK files.  You can extract an OVA file to a directory using ```tar -zxvf file.ova -c ova_directory```.
+
+### Ruby Script
+In order to upload media, you can use the following parameters along with the ```vcloud_upload_media``` Ruby script.  You must install the ```ruby_vcloud_sdk``` gem first.
+
+    vcloud_url='https://us-virginia-1-4.vchs.vmware.com:443' \
+    vcloud_username='clintonskitson@gmail.com@ae010611-6b0b-4f56-a468-ce81f196b51b' \
+    vcloud_password='Ng!wiOD41@T' \
+    vcloud_vdc_name='VDC4' \
+    vcloud_ovf_directory='./coreos_production_vmware_ova/' \
+    vcloud_vapp_name='test13' \
+    ruby vcloud_upload_vapp.rb
+
+
+### Docker Container
+See the ```vcloud_upload_media``` directory.
 
 ## <a id="create_cloud_drive_iso">Create Cloud Drive ISO</a>
 ### Go App

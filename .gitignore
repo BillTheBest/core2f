@@ -1,4 +1,5 @@
 new-drive
 configdrive.iso
 upload_media.rb
-vcloud_upload_media/example
+*/example
+*/coreos_production_vmware_ova
