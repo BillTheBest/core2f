@@ -256,8 +256,8 @@ The script only works with OVF and associated VMDK files.  You can extract an OV
 In order to upload media, you can use the following parameters along with the ```vcloud_upload_media``` Ruby script.  You must install the ```ruby_vcloud_sdk``` gem first.
 
     vcloud_url='https://us-virginia-1-4.vchs.vmware.com:443' \
-    vcloud_username='clintonskitson@gmail.com@ae010611-6b0b-4f56-a468-ce81f196b51b' \
-    vcloud_password='Ng!wiOD41@T' \
+    vcloud_username='user@domain@org_name' \
+    vcloud_password='password' \
     vcloud_vdc_name='VDC4' \
     vcloud_ovf_directory='./coreos_production_vmware_ova/' \
     vcloud_vapp_name='test13' \
